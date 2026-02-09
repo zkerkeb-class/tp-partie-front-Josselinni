@@ -1,40 +1,18 @@
-import { useEffect, useState } from "react";
+import React from 'react';
 
-// On ajoute "onImageClick" dans les paramètres reçus
-const PokeCard = ({ pokemon, onImageClick }) => {
-    const [pokeState, setPokeState] = useState({});
-
-    useEffect(() => {
-        fetch(pokemon.url)
-            .then((response) => response.json())
-            .then((data) => setPokeState(data))
-            .catch((error) => console.error(error));
-    }, [pokemon]);
-
-    const playCry = () => {
-        if (pokeState.cries?.latest) {
-            const audio = new Audio(pokeState.cries.latest);
-            audio.volume = 0.2;
-            audio.play();
-        }
-    };
+const PokeCard = ({ pokemon }) => {
+    if (!pokemon) return null;
 
     return (
         <div className="poke-card">
             <div className="card-header">
-                <h3>{pokeState.name}</h3>
-                <button className="cry-btn" onClick={playCry}>
-                    🔊
-                </button>
+                <h3>{pokemon.name.english}</h3>
             </div>
             
-            {/* L'événement onClick est maintenant ICI, sur l'image uniquement */}
             <img 
                 className="pokemon-sprite"
-                src={pokeState.sprites?.front_default} 
-                alt={pokeState.name} 
-                onClick={onImageClick} 
-                style={{ cursor: "pointer" }} 
+                src={pokemon.image} 
+                alt={pokemon.name.english} 
             />   
         </div>
     );
