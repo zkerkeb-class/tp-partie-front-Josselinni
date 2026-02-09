@@ -55,6 +55,27 @@ const PokePage = () => {
             });
     }, [id]);
 
+    useEffect(() => {
+        if (!details) return;
+
+        const timer = setTimeout(() => {
+            // Récupérer le cri du pokémon depuis l'API PokeAPI
+            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    // L'URL du cri se trouve dans les "cries"
+                    const cryCry = data.cries?.latest;
+                    if (cryCry) {
+                        const audio = new Audio(cryCry);
+                        audio.play().catch((err) => console.log("Impossible de jouer le son:", err));
+                    }
+                })
+                .catch((err) => console.log("Erreur lors de la récupération du cri:", err));
+        }, 700);
+
+        return () => clearTimeout(timer);
+    }, [id, details]);
+
     // 3. Fonction de Modification (Update)
     const handleUpdate = () => {
         // On prépare l'objet à envoyer au backend
