@@ -14,10 +14,10 @@
 }
 
 .pokemon-sprite {
-    width: 300px;
-    height: 300px;
-    
+    max-width: 100%;
+    height: auto;
     image-rendering: pixelated;
+    display: block;
 }
 
 .poke-card {
@@ -201,4 +201,48 @@
     80% { transform: scale(1) translateX(10px); }
     95% { transform: scale(1) translateX(0); }
     100% { transform: scale(1) translateX(0); }
+}
+
+/* Cut animation styles for poke-card */
+.poke-card.cut {
+    position: relative;
+    width: 360px;
+    height: 440px;
+    padding: 0;
+    overflow: visible;
+}
+
+.poke-card.cut .half {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.poke-card.cut .half.left {
+    left: 0;
+    animation: cutLeft 1s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.poke-card.cut .half.right {
+    right: 0;
+    animation: cutRight 1s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.poke-card.cut .half .inner {
+    width: 200%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes cutLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-60%); }
+}
+
+@keyframes cutRight {
+    from { transform: translateX(0); }
+    to { transform: translateX(60%); }
 }

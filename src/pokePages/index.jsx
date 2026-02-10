@@ -1,21 +1,45 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-// Tes dictionnaires de couleurs/images (je les garde, ils sont très bien)
 const typeBackgrounds = {
+    fighting: "url('/card_backgrounds/Fight_type_background.png')",
+    flying: "url('/card_backgrounds/Flight_type_background.png')",
+    poison: "url('/card_backgrounds/Poison_type_background.png')", 
+    ground: "url('/card_backgrounds/Ground_type_background.png')",
+    rock: "url('/card_backgrounds/Rock_type_background.png')",
+    bug: "url('/card_backgrounds/Plant_type_background_V3.png')", 
+    ghost: "url('/card_backgrounds/Ghost_type_background.png')",
+    steel: "url('/card_backgrounds/Steel_type_background.png')",
     fire: "url('/card_backgrounds/Fire_type_background.png')", 
-    normal: "url('/card_backgrounds/Flight_type_background.png')",
+    normal: "url('/card_backgrounds/Normal_type_background.png')",
     grass: "url('/card_backgrounds/Plant_type_background.png')", 
     water: "url('/card_backgrounds/Water_type_background.png')", 
-    bug: "url('/card_backgrounds/Plant_type_background_V3.png')", 
-    // Ajoute les autres si besoin...
+    electric: "url('/card_backgrounds/Electric_type_background.png')",
+    psychic: "url('/card_backgrounds/Psychic_type_background.png')", 
+    ice: "url('/card_backgrounds/Ice_type_background.png')",
+    dragon: "url('/card_backgrounds/Dragon_type_background.png')",
+    dark: "url('/card_backgrounds/Dark_type_background.png')",
+    fairy: "url('/card_backgrounds/Fairy_type_background.png')"
 };
 const cardColors = {
+    fighting: "linear-gradient(135deg, #f85032 0%, #e73827 100%)",
+    flying: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+    poison: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    ground: "linear-gradient(135deg, #d1913c 0%, #ffd194 100%)",
+    rock: "linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)",
+    bug: "linear-gradient(135deg, #D4FC79 0%, #96E6A1 100%)",
+    ghost: "linear-gradient(135deg, #606c88 0%, #3f4c6b 100%)",
+    steel: "linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)",
     fire: "linear-gradient(135deg, #f12711 0%, #f5af19 100%)",
     normal: "linear-gradient(135deg, #E0EAFC 0%, #CFDEF3 100%)",
     grass: "linear-gradient(135deg, #43cea2 0%, #185a9d 100%)",
     water: "linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)",
-    bug: "linear-gradient(135deg, #D4FC79 0%, #96E6A1 100%)",
+    electric: "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)",
+    psychic: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+    ice: "linear-gradient(135deg, #83a4d4 0%, #b6fbff 100%)",
+    dragon: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
+    dark: "linear-gradient(135deg, #232526 0%, #414345 100%)",
+    fairy: "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)",
 };
 const defaultBg = "linear-gradient(135deg, #fceabb 0%, #f8b500 100%)";
 
