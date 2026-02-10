@@ -1,27 +1,44 @@
-import { useEffect,useState } from "react";
+import React from 'react';
 
-const PokeCard = ({ pokemon }) => {
-    const [pokeState, setPokeState] = useState({});
+const PokeCard = ({ pokemon, isCut = false }) => {
+    if (!pokemon) return null;
 
-    useEffect   (() => {
-        fetch(pokemon.url)
-            .then((response) => response.json())
-            .then((data) => {
-                setPokeState(data);
-                console.log("Détails du Pokémon reçus:", data);
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération des détails du Pokémon:", error);
-            });
-    }, [pokemon]);
+    const content = (
+        <>
+            <div className="card-header">
+                <h3 style={{ margin: 0 }}>{pokemon.name.english}</h3>
+            </div>
+            <img
+                className="pokemon-sprite"
+                src={pokemon.image}
+                alt={pokemon.name.english}
+            />
+        </>
+    );
 
+    if (!isCut) {
+        return (
+            <div className="poke-card" style={{ transition: 'opacity 300ms' }}>
+                {content}
+            </div>
+        );
+    }
 
     return (
-        <div>
-            <h3>{pokeState.name}</h3>
-            <p>{pokeState.height}</p>
+        <div className="poke-card cut">
+            <div className="half left" aria-hidden>
+                <div className="inner">
+                    {content}
+                </div>
+            </div>
+
+            <div className="half right" aria-hidden>
+                <div className="inner" style={{ marginLeft: '-100%' }}>
+                    {content}
+                </div>
+            </div>
         </div>
     );
-}
+};
 
 export default PokeCard;
